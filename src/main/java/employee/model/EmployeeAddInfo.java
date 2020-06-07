@@ -4,8 +4,10 @@ public class EmployeeAddInfo {
 	private int id;
 	private String value;
 	private Employee employee;
+	private InfoType infoType;
+	private boolean isPrimary;
 
-	enum infoType {
+	enum InfoType {
 		ADDRESS, CONTACT_INFO
 	}
 

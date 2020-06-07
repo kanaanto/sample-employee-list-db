@@ -1,7 +1,5 @@
 package employee.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +18,9 @@ public class Employee {
 		SINGLE, MARRIED, WIDOWED, DIVORCED, SPACESHIP
 	}
 
-	// public enum Position {
-	// CEO, ENGINEER, KAINUMAN
-	// }
+	public enum Position {
+		CEO, ENGINEER, KAINUMAN
+	}
 
 	@Id
 	@Column(name = "id")
@@ -39,10 +37,10 @@ public class Employee {
 	private String middleName;
 
 	@Column(name = "birth_date")
-	private Date birthDate;
+	private String birthDate;
 
 	@Column(name = "date_hired")
-	private Date dateHired;
+	private String dateHired;
 
 	@Column(name = "marital_status")
 	private MaritalStatus maritalStatus;
@@ -52,6 +50,20 @@ public class Employee {
 
 	@Column(name = "position")
 	private String position;
+
+	@Column(name = "contact_info")
+	private String contactInfo;
+
+	@Column(name = "address_info")
+	private String addressInfo;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -77,19 +89,19 @@ public class Employee {
 		this.middleName = middleName;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 
-	public Date getDateHired() {
+	public String getDateHired() {
 		return dateHired;
 	}
 
-	public void setDateHired(Date dateHired) {
+	public void setDateHired(String dateHired) {
 		this.dateHired = dateHired;
 	}
 
@@ -117,4 +129,19 @@ public class Employee {
 		this.position = position;
 	}
 
+	public String getContactInfo() {
+		return contactInfo;
+	}
+
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
+	}
+
+	public String getAddressInfo() {
+		return addressInfo;
+	}
+
+	public void setAddressInfo(String addressInfo) {
+		this.addressInfo = addressInfo;
+	}
 }

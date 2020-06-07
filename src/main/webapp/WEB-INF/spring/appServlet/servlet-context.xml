@@ -41,6 +41,8 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>employee.model.Employee</beans:value>
+				<beans:value>employee.model.EmployeeAddInfo</beans:value>
+				<beans:value>employee.model.Login</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -52,12 +54,10 @@
 		</beans:property>
 	</beans:bean>
 	
-	<beans:bean id="dao" class="employee.dao.EmployeeDao">
-		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-	</beans:bean>
-	<beans:bean id="service" class="employee.service.EmployeeServiceImpl">
-		<beans:property name="dao" ref="dao"></beans:property>
-	</beans:bean>
+	<beans:bean id="loginDao" 			class="employee.dao.LoginDao"/>
+	<beans:bean id="loginService" 		class="employee.service.LoginServiceImpl"/>
+	<beans:bean id="employeeDao" 		class="employee.dao.EmployeeDao"/>
+	<beans:bean id="employeeService" 	class="employee.service.EmployeeServiceImpl"/>
 	<context:component-scan base-package="employee" />
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>

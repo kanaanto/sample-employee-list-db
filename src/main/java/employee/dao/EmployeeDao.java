@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +12,8 @@ import employee.model.Employee;
 
 @Repository
 public class EmployeeDao {
-
+	@Autowired
 	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -27,7 +24,9 @@ public class EmployeeDao {
 
 	@Transactional
 	public Employee getEmployeeById(int id) {
-		return new Employee();
+		Session session = this.sessionFactory.getCurrentSession();
+		Employee p = (Employee) session.load(Employee.class, new Integer(id));
+		return p;
 	}
 
 	@Transactional

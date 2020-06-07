@@ -2,6 +2,7 @@ package employee.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,40 +11,37 @@ import employee.model.Employee;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-	private EmployeeDao dao;
-
-	public void setDao(EmployeeDao dao) {
-		this.dao = dao;
-	}
+	@Autowired
+	private EmployeeDao employeeDao;
 
 	@Override
 	@Transactional
 	public List<Employee> getEmployeeList() {
-		return dao.getEmployeeList();
+		return employeeDao.getEmployeeList();
 	}
 
 	@Override
 	@Transactional
 	public Employee getEmployeeById(int id) {
-		return dao.getEmployeeById(id);
+		return employeeDao.getEmployeeById(id);
 	}
 
 	@Override
 	@Transactional
 	public void addEmployee(Employee emp) {
-		dao.addEmployee(emp);
+		employeeDao.addEmployee(emp);
 	}
 
 	@Override
 	@Transactional
 	public void updateEmployee(Employee emp) {
-		dao.updateEmployee(emp);
+		employeeDao.updateEmployee(emp);
 	}
 
 	@Override
 	@Transactional
 	public void deleteEmployee(int id) {
-		dao.deleteEmployee(id);
+		employeeDao.deleteEmployee(id);
 	}
 
 }

@@ -1,7 +1,6 @@
 package employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,37 +13,40 @@ import employee.service.EmployeeService;
 
 @Controller
 public class EmployeeController {
-	private EmployeeService service;
-
-	@Autowired(required = true)
-	@Qualifier(value = "service")
-	public void setEmployeeService(EmployeeService service) {
-		this.service = service;
-	}
+	@Autowired
+	private EmployeeService employeeService;
 
 	@RequestMapping("/")
 	public String listPersons(Model model) {
-		model.addAttribute("employeeList", this.service.getEmployeeList());
+		/*
+		 * if (session.getAttribute("username") == null) {
+		 * model.addAttribute("login", new Login()); return "login"; }
+		 */
+		model.addAttribute("employee", new Employee());
+		model.addAttribute("employeeList", employeeService.getEmployeeList());
 		return "index";
 	}
 
 	@RequestMapping(value = "/employee/add", method = RequestMethod.POST)
 	public String addEmployee(@ModelAttribute("employee") Employee emp) {
-		this.service.addEmployee(emp);
-		return "redirect:/index";
+		if (emp.getId() == 0) {
+			employeeService.addEmployee(emp);
+		} else {
+			employeeService.updateEmployee(emp);
+		}
+		return "redirect:/";
 	}
 
 	@RequestMapping("/employee/edit/{id}")
 	public String editPerson(@PathVariable("id") int id, Model model) {
-		model.addAttribute("person", this.service.getEmployeeById(id));
-		model.addAttribute("listPersons", this.service.getEmployeeList());
-		return "redirect:/index";
+		model.addAttribute("employee", employeeService.getEmployeeById(id));
+		model.addAttribute("employeeList", employeeService.getEmployeeList());
+		return "index";
 	}
 
 	@RequestMapping("/employee/delete/{id}")
 	public String removePerson(@PathVariable("id") int id) {
-
-		this.service.deleteEmployee(id);
-		return "redirect:/index";
+		employeeService.deleteEmployee(id);
+		return "redirect:/";
 	}
 }
