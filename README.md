@@ -27,6 +27,8 @@ notes (1/4):
 1. dev time: ~1 hour
 2. added edit feature for admins
 3. added computation for age and years rendered
+
+total setup and dev time: ~10 hours
 -----------------------------------------------------------
 sql instructions:
 1. employeedb.sql under src/main/resources (not integrated in deployment process)
