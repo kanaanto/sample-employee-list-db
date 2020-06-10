@@ -1,13 +1,13 @@
 # employee-list-db
 a sample spring/hibernate/mysql impl of an employee list for reference
 
-notes (1/2):
+notes (1/4):
 1. had issues in setting up local machine
 2. first commit was done in ~4 hours, including the setup. still need a few more features to implement
 
-(2/2):
+(2/4):
 1. wasn't able to complete the requirements due to lack of time (and frustration lol)
-2. overall time: ~7 hours
+2. dev time: ~3 hours
 3. features not implemented:
 	- session handling: no backend login/logout
 		- no user type handling
@@ -15,7 +15,18 @@ notes (1/2):
 	- no computation of age and years rendered
 	- no multiple adding of contact and address info
 		- no choosing of primary info
-		
+(3/4):
+1. dev time: ~2 hours
+2. added a login security checker via xml
+3. added user role handling
+	- admin can add, edit, delete and view employee list
+	- user can view employee list
+
+(4/4): - to follow -
+1. dev time:
+2. add edit feature for admins
+3. add computation for age and years rendered
+-----------------------------------------------------------
 sql instructions:
 1. employeedb.sql under src/main/resources (not integrated in deployment process)
 	- db config to edit: webapp/WEB-INF/spring/appServlet/servlet-context.xml
