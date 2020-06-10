@@ -33,10 +33,11 @@ public class EmployeeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping("/employee/edit/{id}")
+	@RequestMapping("/employee/{id}")
 	public String editPerson(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", employeeService.getEmployeeById(id));
 		model.addAttribute("employeeList", employeeService.getEmployeeList());
+		model.addAttribute("type", "add");
 		return "index";
 	}
 
@@ -49,12 +50,6 @@ public class EmployeeController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		return "login";
-	}
-
-	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
-	public String loginerror(Model model) {
-		model.addAttribute("error", "true");
-		return "denied";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

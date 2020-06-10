@@ -1,13 +1,20 @@
 package employee.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Proxy;
 
 @Entity
+@Proxy(lazy = false)
 @Table(name = "employee")
 public class Employee {
 	public enum Gender {
@@ -56,6 +63,12 @@ public class Employee {
 
 	@Column(name = "address_info")
 	private String addressInfo;
+
+	@Transient
+	private int age;
+
+	@Transient
+	private int renderedYears;
 
 	public int getId() {
 		return id;
@@ -143,5 +156,35 @@ public class Employee {
 
 	public void setAddressInfo(String addressInfo) {
 		this.addressInfo = addressInfo;
+	}
+
+	public int getAge() {
+		try {
+			Date birthDate = new SimpleDateFormat("yyyy-dd-MM").parse(this.birthDate);
+			Date dateNow = new Date();
+			setAge(dateNow.getYear() - birthDate.getYear());
+		} catch (Exception e) {
+			return -1;
+		}
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getRenderedYears() {
+		try {
+			Date dateHired = new SimpleDateFormat("yyyy-dd-MM").parse(this.dateHired);
+			Date dateNow = new Date();
+			setRenderedYears(dateNow.getYear() - dateHired.getYear());
+		} catch (Exception e) {
+			return -1;
+		}
+		return renderedYears;
+	}
+
+	public void setRenderedYears(int renderedYears) {
+		this.renderedYears = renderedYears;
 	}
 }

@@ -21,11 +21,10 @@ notes (1/4):
 3. added user role handling
 	- admin can add, edit, delete and view employee list
 	- user can view employee list
-
-(4/4): - to follow -
-1. dev time:
-2. add edit feature for admins
-3. add computation for age and years rendered
+(4/4): 
+1. dev time: ~1 hour
+2. added edit feature for admins
+3. added computation for age and years rendered
 -----------------------------------------------------------
 sql instructions:
 1. employeedb.sql under src/main/resources (not integrated in deployment process)

@@ -6,8 +6,8 @@
 <html>
 <head>
 <title>Login</title>
-<link href="<c:url value='/resources/css/bootstrap.css' />" rel="stylesheet">
-<link href="<c:url value='/resources/css/login.css' />" rel="stylesheet">
+<link href='resources/css/bootstrap.css' rel="stylesheet">
+<link href='resources/css/login.css' rel="stylesheet">
 </head>
 	<body class="text-center">
 		<form class="form-signin" name="f" action="<c:url value='j_spring_security_check'/>"
