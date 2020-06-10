@@ -18,10 +18,6 @@ public class EmployeeController {
 
 	@RequestMapping("/")
 	public String listPersons(Model model) {
-		/*
-		 * if (session.getAttribute("username") == null) {
-		 * model.addAttribute("login", new Login()); return "login"; }
-		 */
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("employeeList", employeeService.getEmployeeList());
 		return "index";
@@ -48,5 +44,21 @@ public class EmployeeController {
 	public String removePerson(@PathVariable("id") int id) {
 		employeeService.deleteEmployee(id);
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		return "login";
+	}
+
+	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+	public String loginerror(Model model) {
+		model.addAttribute("error", "true");
+		return "denied";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(Model model) {
+		return "login";
 	}
 }

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html lang="en">
   <head>
@@ -25,13 +25,16 @@
     <title>Employee DB</title>
   </head>
   <body>
-  <div class="col-md-10">
+  <div class="col-md-12">
   <div class="row m-3">
   	<h3>Employee List</h3>
-  	<button type="button" class="ml-3 mr-3 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-	  Add Employee
-	</button>
-	<a href="logout">(logout)</a>
+  	<sec:authorize access="hasRole('ROLE_ADMIN')">
+
+  		<button type="button" class="ml-3 mr-3 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+	  	Add Employee
+		</button>
+	</sec:authorize>
+	<a href="<c:url value='j_spring_security_logout'/>">(logout)</a>
   </div>
     
     <c:if test="${!empty employeeList}">
@@ -55,8 +58,14 @@
 	      <td>${e.birthDate}</td>
 	      <td>${e.dateHired}</td>
 	      <td>
+  	<sec:authorize access="hasRole('ROLE_ADMIN')">
+
 	      	<a class="btn btn-info" href="<c:url value='/employee/edit/${e.id}' />" >Edit</a>
-	      	<a class="btn btn-info" href="<c:url value='/employee/delete/${e.id}' />" >Delete</a>
+	      	<a class="btn btn-danger" href="<c:url value='/employee/delete/${e.id}' />" >Delete</a>
+	</sec:authorize>
+  	<sec:authorize access="hasRole('ROLE_USER')">
+	      	<a class="btn btn-info" href="<c:url value='/employee/edit/${e.id}' />" >View</a>
+	</sec:authorize>
 	      </td>
 	    </tr>
 	    </c:forEach>
@@ -78,17 +87,8 @@
       <div class="modal-body">
       <form:form action="employee/add" commandName="employee">
 	    <div class="col-md-12">
-	   		 <c:if test="${!empty employee.firstName}">
-		    	<div class="form-group row">
-				    <label for="id" class="col-sm-3 col-form-label">ID</label>
-				    <div class="col-sm-7">
-				      <form:input path="id" readonly="true" size="8"  disabled="true" />
-						<form:hidden path="id" />
-				    </div>
-				</div>
-			</c:if>
 	  		<div class="form-group row">
-			    <label for="firstName" class="col-sm-3 col-form-label">First Name ${employee.firstName}</label>
+			    <label for="firstName" class="col-sm-3 col-form-label">First Name</label>
 			    <div class="col-sm-7">
 			      <form:input path="firstName" type="text" class="form-control" id="firstName"/>
 			    </div>
