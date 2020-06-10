@@ -15,12 +15,14 @@ notes (1/4):
 	- no computation of age and years rendered
 	- no multiple adding of contact and address info
 		- no choosing of primary info
+		
 (3/4):
 1. dev time: ~2 hours
 2. added a login security checker via xml
 3. added user role handling
 	- admin can add, edit, delete and view employee list
 	- user can view employee list
+	
 (4/4): 
 1. dev time: ~1 hour
 2. added edit feature for admins
